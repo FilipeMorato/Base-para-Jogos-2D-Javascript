@@ -2,8 +2,8 @@ window.onload = function() {
 const canvas = document.getElementById("canvas")
 const context = canvas.getContext("2d")
 
-canvas.width = 1600
-canvas.height = 900
+canvas.width = 1920
+canvas.height = 1080
     
     let frameTime = {
         previous: 0,
