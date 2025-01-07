@@ -1,27 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GameTemplate</title>
+  <title>2D Game Template</title>
   <style>
-  body {
-    padding: 0;
-    margin: 0;
-    display: flex;
-    height: 100%;
-  }
-  canvas {
-    width: 100%;
-    object-fit: contain;
-    image-rendering: crisp-edges;
-    image-rendering: pixelated;
- }
-  
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+
+    #canvas-container {
+      position: relative;
+      overflow: hidden;
+    }
+
+    canvas {
+      background-color: black;
+      display: block;
+      transform-origin: top left;
+      image-rendering: crisp-edges;
+      image-rendering: pixelated;
+    }
   </style>
   <script type= "module" src= "Main.js"></script>
 </head>
 <body>
-  <canvas id="canvas"></canvas>
-  
+  <div id="canvas-container">
+    <canvas id="canvas" width="1920" height="1080"></canvas>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const container = document.getElementById('canvas-container');
+    const originalWidth = canvas.width;
+    const originalHeight = canvas.height;
+
+    function resizeCanvas() {
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+
+      // Calcula a escala com base no menor fator de escala para largura e altura
+      const scaleWidth = windowWidth / originalWidth;
+      const scaleHeight = windowHeight / originalHeight;
+      const scale = Math.min(scaleWidth, scaleHeight, 1);
+
+      // Aplica a escala ao canvas
+      canvas.style.transform = `scale(${scale})`;
+      container.style.width = `${originalWidth * scale}px`;
+      container.style.height = `${originalHeight * scale}px`;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+  </script>
 </body>
 </html>
